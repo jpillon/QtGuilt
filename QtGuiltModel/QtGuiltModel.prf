@@ -1,0 +1,15 @@
+
+
+
+M_LIBNAME=$$_FILE_
+M_LIBNAME=$$basename(M_LIBNAME)
+M_LIBNAME=$$section(M_LIBNAME, ".", 0,0)
+
+!contains(TARGET, $$M_LIBNAME) {
+  win32:CONFIG(release, debug|release):     LIBS += -L$$OUT_PWD/../$$M_LIBNAME/release/  -l$$M_LIBNAME
+  else:win32:CONFIG(debug, debug|release):  LIBS += -L$$OUT_PWD/../$$M_LIBNAME/debug/    -l$$M_LIBNAME
+  else:unix:                                LIBS += -L$$OUT_PWD/../$$M_LIBNAME/          -l$$M_LIBNAME
+
+  INCLUDEPATH += $$PWD/../$$M_LIBNAME
+  DEPENDPATH  += $$PWD/../$$M_LIBNAME
+}

@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/patches">
+        <file alias="applied">icons/applied.png</file>
+        <file alias="desactivated">icons/desactivated.png</file>
+        <file alias="notapplied">icons/notapplied.png</file>
+        <file alias="patchfile">icons/patchfile.png</file>
+        <file alias="minus">icons/minus.png</file>
+        <file alias="minusplus">icons/minusplus.png</file>
+        <file alias="plus">icons/plus.png</file>
+    </qresource>
+    <qresource prefix="/actions">
+        <file alias="add">icons/add.png</file>
+        <file alias="delete">icons/delete.png</file>
+        <file alias="diffz">icons/diffz.png</file>
+        <file alias="goto">icons/goto.png</file>
+        <file alias="init">icons/init.png</file>
+        <file alias="pop">icons/pop.png</file>
+        <file alias="push">icons/push.png</file>
+        <file alias="refresh">icons/refresh.png</file>
+        <file alias="rename">icons/rename.png</file>
+        <file alias="validate">icons/validate.png</file>
+        <file alias="explode">icons/bomb.png</file>
+        <file alias="tree">icons/tree.png</file>
+    </qresource>
+    <qresource prefix="/app">
+        <file alias="QtGuilt">icons/QtGuilt.png</file>
+    </qresource>
+</RCC>

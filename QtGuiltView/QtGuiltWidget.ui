@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QtGuiltWidget</class>
+ <widget class="QWidget" name="QtGuiltWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>362</width>
+    <height>561</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QWidget" name="toolBar" native="true"/>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QTreeView" name="treeView">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditKeyPressed</set>
+      </property>
+      <property name="expandsOnDoubleClick">
+       <bool>false</bool>
+      </property>
+      <attribute name="headerVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+     <widget class="QPlainTextEdit" name="plainTextEditHeader"/>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutHeader">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButtonSaveHeader">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="statusBar">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionOpen_Repository">
+   <property name="text">
+    <string>Open Repository</string>
+   </property>
+  </action>
+  <action name="actionInit_Repository">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/init</normaloff>:/actions/init</iconset>
+   </property>
+   <property name="text">
+    <string>Init Repository</string>
+   </property>
+   <property name="toolTip">
+    <string>Init Repository</string>
+   </property>
+  </action>
+  <action name="actionPop">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/pop</normaloff>:/actions/pop</iconset>
+   </property>
+   <property name="text">
+    <string>Pop</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+  </action>
+  <action name="actionPush">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/push</normaloff>:/actions/push</iconset>
+   </property>
+   <property name="text">
+    <string>Push</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionGoto">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/goto</normaloff>:/actions/goto</iconset>
+   </property>
+   <property name="text">
+    <string>Goto</string>
+   </property>
+  </action>
+  <action name="actionNew_Patch">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/add</normaloff>:/actions/add</iconset>
+   </property>
+   <property name="text">
+    <string>New Patch</string>
+   </property>
+  </action>
+  <action name="actionRename">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/rename</normaloff>:/actions/rename</iconset>
+   </property>
+   <property name="text">
+    <string>Rename</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/refresh</normaloff>:/actions/refresh</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionUnrefreshed">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/diffz</normaloff>:/actions/diffz</iconset>
+   </property>
+   <property name="text">
+    <string>View Unrefreshed modifications</string>
+   </property>
+   <property name="toolTip">
+    <string>View Unrefreshed modifications</string>
+   </property>
+  </action>
+  <action name="actionSave_header">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/validate</normaloff>:/actions/validate</iconset>
+   </property>
+   <property name="text">
+    <string>Save header</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetWithChildrenShortcut</enum>
+   </property>
+  </action>
+  <action name="actionDelete_Patch">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/delete</normaloff>:/actions/delete</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Patch</string>
+   </property>
+  </action>
+  <action name="actionActivate">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/patches/applied</normaloff>:/patches/applied</iconset>
+   </property>
+   <property name="text">
+    <string>Activate</string>
+   </property>
+  </action>
+  <action name="actionDesactivate">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/patches/desactivated</normaloff>:/patches/desactivated</iconset>
+   </property>
+   <property name="text">
+    <string>Desactivate</string>
+   </property>
+  </action>
+  <action name="actionExplode">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/explode</normaloff>:/actions/explode</iconset>
+   </property>
+   <property name="text">
+    <string>Explode</string>
+   </property>
+  </action>
+  <action name="actionAdd_Files">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/patches/plus</normaloff>:/patches/plus</iconset>
+   </property>
+   <property name="text">
+    <string>Add Files</string>
+   </property>
+  </action>
+  <action name="actionRemove_Files">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/patches/minus</normaloff>:/patches/minus</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Files</string>
+   </property>
+  </action>
+  <action name="actionMerge_on_Top">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/patches/minusplus</normaloff>:/patches/minusplus</iconset>
+   </property>
+   <property name="text">
+    <string>Merge on Top</string>
+   </property>
+  </action>
+  <action name="actionAuto_Expand_Collapse">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/tree</normaloff>:/actions/tree</iconset>
+   </property>
+   <property name="text">
+    <string>Auto Expand/Collapse</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../QtGuiltModel/QtGuiltIcons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

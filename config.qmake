@@ -1,0 +1,58 @@
+VERSION=0.1.0
+COMPANY_NAME=LibertesAlternatives.org
+APPLICATION_NAME=QtGuilt
+SAVE_RESTORE_VERSION=0x000100
+
+DEFINES += VERSION=$$VERSION
+DEFINES += COMPANY_NAME=\\\"$$COMPANY_NAME\\\"
+DEFINES += APPLICATION_NAME=\\\"$$APPLICATION_NAME\\\"
+DEFINES += SAVE_RESTORE_VERSION=$$SAVE_RESTORE_VERSION
+
+exists($$TARGET/*.h) {
+  HEADERS *= *.h
+}
+
+exists($$TARGET/*.c) {
+  SOURCES *= *.c
+}
+
+exists($$TARGET/*.cpp) {
+  SOURCES *= *.cpp
+}
+
+exists($$TARGET/*.ui) {
+  FORMS *= *.ui
+}
+
+exists($$TARGET/*.qrc) {
+  RESOURCES *= *.qrc
+}
+
+QTGUILT_PREFIX=$$PREFIX
+
+isEmpty(QTGUILT_PREFIX) {
+  unix:!symbian {
+      maemo5 {
+          QTGUILT_PREFIX = /opt/usr
+      } else {
+          QTGUILT_PREFIX = /usr
+      }
+      INSTALLS += target
+  }
+}
+
+contains(TEMPLATE, lib) {
+  unix:!symbian {
+      target.path = $$QTGUILT_PREFIX/lib
+      INSTALLS += target
+  }
+}
+
+contains(TEMPLATE, app) {
+  unix:!symbian {
+      target.path = $$QTGUILT_PREFIX/bin
+      INSTALLS += target
+  }
+}
+
+INCLUDEPATH += ..
