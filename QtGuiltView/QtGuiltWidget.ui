@@ -78,6 +78,10 @@
    </item>
   </layout>
   <action name="actionOpen_Repository">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/open</normaloff>:/actions/open</iconset>
+   </property>
    <property name="text">
     <string>Open Repository</string>
    </property>
