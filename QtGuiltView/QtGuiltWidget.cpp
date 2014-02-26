@@ -309,7 +309,8 @@ void QtGuiltWidget::setActions()
                       << ui->actionRename
                       << ui->actionRefresh
                       << ui->actionPop
-                      << ui->actionPush;
+                      << ui->actionPush
+                      << ui->actionCopy_Path_to_ClipBoard;
 
   m_toolBarActions    << ui->actionOpen_Repository
                       << ui->actionInit_Repository
