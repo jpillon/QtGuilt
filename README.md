@@ -40,7 +40,7 @@ The visualisation works well, but everything has not been fully tested for now a
  * [MG] edit/view the patch header
  * ...
 * Additional Features : 
- * [MV] View the patches in e tree manner (PatchName, Mofified files, Modifications chunks)
+ * [MV] View the patches in a tree manner (PatchName, Mofified files, Modifications chunks)
  * [MGW] Apply unrefreshed modifications on existing or new patch
  * [MG] Desactivate/Activate a patch
  * [MG] Change patches order
