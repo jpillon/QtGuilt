@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QMenu>
+#include <QClipboard>
 
 QtGuiltWidget::QtGuiltWidget(QWidget *parent) :
   QWidget(parent),
@@ -141,6 +142,16 @@ void QtGuiltWidget::push()
   }
   p_model->guiltAskerModel()->executeCommand(QtGuiltAskerModel::pushPatchCommand, whichone);
   m_fromContextual = false;
+}
+
+void QtGuiltWidget::copyToClipBoard()
+{
+  QtGuiltPatch* patch = currentPatch();
+  if(patch)
+  {
+    QString path = patch->filePath();
+    QApplication::clipboard()->setText(path);
+  }
 }
 
 void QtGuiltWidget::Goto()
@@ -273,6 +284,7 @@ void QtGuiltWidget::setConnections()
   connectAction(ui->actionRefresh,          SLOT(refresh()));
   connectAction(ui->actionPop,              SLOT(pop()));
   connectAction(ui->actionPush,             SLOT(push()));
+  connectAction(ui->actionCopy_Path_to_ClipBoard, SLOT(copyToClipBoard()));
   //Connect the rest
   connectAction(ui->actionOpen_Repository,  SLOT(openRepo()));
   connectAction(ui->actionInit_Repository,  SLOT(initRepo()));

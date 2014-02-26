@@ -21,6 +21,8 @@
         <file alias="validate">icons/validate.png</file>
         <file alias="explode">icons/bomb.png</file>
         <file alias="tree">icons/tree.png</file>
+        <file alias="open">icons/open.png</file>
+        <file alias="copy">icons/copy.png</file>
     </qresource>
     <qresource prefix="/app">
         <file alias="QtGuilt">icons/QtGuilt.png</file>

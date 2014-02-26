@@ -78,6 +78,10 @@
    </item>
   </layout>
   <action name="actionOpen_Repository">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/open</normaloff>:/actions/open</iconset>
+   </property>
    <property name="text">
     <string>Open Repository</string>
    </property>
@@ -251,6 +255,15 @@
    </property>
    <property name="text">
     <string>Auto Expand/Collapse</string>
+   </property>
+  </action>
+  <action name="actionCopy_Path_to_ClipBoard">
+   <property name="icon">
+    <iconset resource="../QtGuiltModel/QtGuiltIcons.qrc">
+     <normaloff>:/actions/copy</normaloff>:/actions/copy</iconset>
+   </property>
+   <property name="text">
+    <string>Copy Path to ClipBoard</string>
    </property>
   </action>
  </widget>

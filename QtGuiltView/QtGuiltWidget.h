@@ -42,6 +42,7 @@ class QtGuiltWidget : public QWidget
     void refresh();
     void pop();
     void push();
+    void copyToClipBoard();
     //Others
     void openRepo();
     void initRepo();
