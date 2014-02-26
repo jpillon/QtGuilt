@@ -349,7 +349,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
     QFileSystemWatcher  m_seriesWatcher;
     QFileSystemWatcher  m_statusWatcher;
     QFileSystemWatcher  m_guiltWatcher;
-    static QString      m_fakeTop;
+    static QString      m_fakeBasePatch;
 };
 
 #endif // QTGUILTMODEL_H

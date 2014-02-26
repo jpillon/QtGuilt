@@ -25,7 +25,7 @@
 #include <QtGuiltPatch.h>
 #include <QTimer>
 
-QString QtGuiltModel::m_fakeTop = "QtGuiltFakeTop";
+QString QtGuiltModel::m_fakeBasePatch = "QtGuiltFakeBase";
 
 QtGuiltModel::QtGuiltModel(QObject *parent):
   QtGuiltCommandIssuer(parent),
@@ -154,7 +154,7 @@ bool QtGuiltModel::push(const QString &patchname, const bool force)
     } else {
       QStringList s;
       QString t;
-      if(patchname == m_fakeTop)
+      if(patchname == m_fakeBasePatch)
       {
         res = runGuiltCommand(QStringList() << "pop" << "-a");
       } else
@@ -577,7 +577,7 @@ bool QtGuiltModel::top(QString &patchname)
     if(a.size() > 0)
       patchname = a.last();
     else
-      patchname = m_fakeTop;
+      patchname = m_fakeBasePatch;
     res = true;
   }
   endAction(__FUNCTION__);
