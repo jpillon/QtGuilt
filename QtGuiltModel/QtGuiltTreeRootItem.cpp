@@ -73,8 +73,6 @@ void QtGuiltTreeRootItem::treeItemUpdate()
       addTreeChild(child);
     }
   }
-//  QCoreApplication::processEvents();
-
   //Remove deleted
   foreach(QVariant patch, treeData())
   {
@@ -84,13 +82,12 @@ void QtGuiltTreeRootItem::treeItemUpdate()
       deleteTreeChild(child);
     }
   }
-//  QCoreApplication::processEvents();
   //Sort
   QList<QVariant> l;
   foreach(QString s, m_series)
     l.append(s);
   treeSortChildren(l);
-//  QCoreApplication::processEvents();
+
   QString topPatch;
   p_model->top(topPatch);
   //Update

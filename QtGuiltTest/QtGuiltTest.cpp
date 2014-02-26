@@ -117,6 +117,7 @@ void QtGuiltTest::testModel()
   qDebug() << p_model->repository();
   foreach (QString p, toadd) {
     QVERIFY(p_model->newPatch(p));
+    QCoreApplication::processEvents();
   }
   QVERIFY(p_model->series(tmp));
 //  qDebug() << toadd;
@@ -128,6 +129,7 @@ void QtGuiltTest::testModel()
   QCOMPARE(tmp, toadd);
 
   QVERIFY(p_model->rename(rename[0], rename[1]));
+  QCoreApplication::processEvents();
   toadd.replace(toadd.indexOf(rename[0]), rename[1]);
   QVERIFY(p_model->series(tmp));
 
@@ -140,6 +142,7 @@ void QtGuiltTest::testModel()
   QVERIFY(p_model->move(move[0], move[1]));
   toadd.removeOne(move[0]);
   toadd.insert(toadd.indexOf(move[1]), move[0]);
+  QCoreApplication::processEvents();
   QVERIFY(p_model->series(tmp));
 
 
@@ -149,6 +152,7 @@ void QtGuiltTest::testModel()
   QCOMPARE(tmp, toadd);
 
   QVERIFY(p_model->runGuiltCommand(QStringList() << "push" << "-a"));
+  QCoreApplication::processEvents();
   QVERIFY(p_model->runGuiltCommand(QStringList() << "new" << ext));
 
   QCoreApplication::processEvents();
@@ -171,6 +175,7 @@ void QtGuiltTest::testModel()
   foreach (QString p, tmp) {
     QStringList tmp2;
     QVERIFY(p_model->del(p));
+    QCoreApplication::processEvents();
 
     toadd.removeOne(p);
     QVERIFY(p_model->series(tmp2));
@@ -208,6 +213,7 @@ void QtGuiltTest::testModel2()
   QStringList tmp;
   p_model->createRepo(repo);
   QVERIFY(p_model->import(patchPath));
+  QCoreApplication::processEvents();
   qDebug() << p_model->lastStderr();
   qDebug() << p_model->lastStdout();
   QVERIFY(p_model->series(tmp));

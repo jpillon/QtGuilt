@@ -207,11 +207,9 @@ void QtGuiltTreeModel::repoChanged()
 void QtGuiltTreeModel::editBegin() const
 {
   disconnect(p_root_item, SIGNAL(topChanged(int)), this, SLOT(notifyTopChanged(int)));
-  QCoreApplication::processEvents();
 }
 
 void QtGuiltTreeModel::editEnd() const
 {
-
   connect(p_root_item, SIGNAL(topChanged(int)), this, SLOT(notifyTopChanged(int)), Qt::UniqueConnection);
 }

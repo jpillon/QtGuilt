@@ -367,7 +367,7 @@ bool QtGuiltModel::extract(const QString &patchname, const QString &filename)
   }
   res = restoreTop() && res;
   endAction(__FUNCTION__);
-  QCoreApplication::processEvents();
+
   return res;
 }
 
@@ -376,7 +376,7 @@ bool QtGuiltModel::del(const QString &patchname)
   beginAction(__FUNCTION__);
   bool res = runGuiltCommand(QStringList() << "delete" << "-f" << patchname);
   endAction(__FUNCTION__);
-  QCoreApplication::processEvents();
+
   return res;
 }
 
@@ -393,7 +393,7 @@ bool QtGuiltModel::newPatch(const QString &patchname)
   else
     res = runGuiltCommand(QStringList() << "new" << pn);
   endAction(__FUNCTION__);
-  QCoreApplication::processEvents();
+
   return res;
 }
 
@@ -402,7 +402,7 @@ bool QtGuiltModel::import(const QString &patchpath)
   beginAction(__FUNCTION__);
   bool res = runGuiltCommand(QStringList() << "import" << patchpath);
   endAction(__FUNCTION__);
-  QCoreApplication::processEvents();
+
   return res;
 }
 
@@ -816,7 +816,7 @@ bool QtGuiltModel::restoreTop()
 {
   if(--m_nsave == 0)
   {
-    QCoreApplication::processEvents();
+
     if(m_series.contains(m_savedTop) && !push(m_savedTop))
     {
       m_nsave++;
@@ -848,7 +848,7 @@ void QtGuiltModel::endAction(const QString &action)
   if(--m_naction == 0)
   {
     p_modificationTimer->start(1000);
-    QCoreApplication::processEvents();
+
     emit actionEnd(action);
   }
 }
@@ -892,7 +892,7 @@ void QtGuiltModel::updateEverything()
     if(d.exists() && m_guiltWatcher.directories().isEmpty())
     {
       m_guiltWatcher.addPath(d.absolutePath());
-      QCoreApplication::processEvents();
+
     }
 
     m_guiltWatcher.blockSignals(false);
@@ -915,7 +915,7 @@ void QtGuiltModel::updateSeries(QString file)
   if(!m_seriesWatcher.files().isEmpty())
   {
     m_seriesWatcher.removePaths(m_seriesWatcher.files());
-    QCoreApplication::processEvents();
+
   }
   while(d.exists() && waitForFileToExist && !QFile::exists(file))
   {
@@ -946,7 +946,7 @@ void QtGuiltModel::updateSeries(QString file)
     if(m_seriesWatcher.files().isEmpty())
     {
       m_seriesWatcher.addPath(file);
-      QCoreApplication::processEvents();
+
     }
 
   }
@@ -964,7 +964,7 @@ void QtGuiltModel::updateStatus(QString file)
   if(!m_statusWatcher.files().isEmpty())
   {
     m_statusWatcher.removePaths(m_statusWatcher.files());
-    QCoreApplication::processEvents();
+
   }
   if(QFile::exists(file))
   {
@@ -975,7 +975,7 @@ void QtGuiltModel::updateStatus(QString file)
     if(m_statusWatcher.files().isEmpty())
     {
       m_statusWatcher.addPath(file);
-      QCoreApplication::processEvents();
+
     }
   }
 

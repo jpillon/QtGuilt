@@ -76,7 +76,6 @@ bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList 
   if(m_echoCommand)           qDebug() << "Cmd::" << program << args;
   if(!m_stdSilent)            qDebug() << "Std::" << m_lastStdout;
   if(!result && !m_errSilent) qDebug() << "Err::" << m_lastStderr;
-//  QCoreApplication::processEvents();
   return result;
 }
 
