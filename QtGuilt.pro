@@ -10,4 +10,5 @@ exists($$PRO_FILE):error("Cannot build inside the sources")
 SUBDIRS += \
     QtGuiltModel \
     QtGuiltView \
-    QtGuilt 
+    QtGuilt \ 
+    QtGuiltTest
