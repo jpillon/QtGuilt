@@ -96,6 +96,7 @@ public:
     QMap<int, QPushButton*> m_buttons;
     Ui::QtGuiltGUIAsker *ui;
     QtGuiltDiffSyntaxHighlighter* p_diffHighlighter;
+    QFont m_savedFont;
 };
 
 #endif // QTGUILTGUIASKER_H

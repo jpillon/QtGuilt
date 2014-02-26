@@ -40,6 +40,7 @@ QtGuiltGUIAsker::QtGuiltGUIAsker(QWidget *parent) :
     m_buttons[i] = b;
     connect(b, SIGNAL(clicked()), this, SLOT(buttonClicked()));
   }
+  m_savedFont = ui->textEdit->font();
 }
 
 QtGuiltGUIAsker::~QtGuiltGUIAsker()
@@ -114,8 +115,13 @@ void QtGuiltGUIAsker::addButtons(const QMap<int, QString> &actions)
 void QtGuiltGUIAsker::updateHighlighter(bool set)
 {
   p_diffHighlighter->setDocument(NULL);
+  ui->textEdit->setFont(m_savedFont);
   if(set)
+  {
+    QFont f("monospace");
+    ui->textEdit->setFont(f);
     p_diffHighlighter->setDocument(ui->textEdit->document());
+  }
 }
 
 void QtGuiltGUIAsker::buttonClicked()

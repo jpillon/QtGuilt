@@ -20,8 +20,8 @@ class QtGuiltPatchEditor : public QWidget
     explicit QtGuiltPatchEditor(QWidget *parent = 0);
     ~QtGuiltPatchEditor();
   public slots:
-    void setFile(const QString& filename, bool readonly, int index = 0);
-    void setFile(const QString& filename);
+    void setFile(const QString& filename, bool readonly, int index);
+    void setFile(const QString& filename, bool force = true);
     void save();
     void highlightCurrentLine();
   private:

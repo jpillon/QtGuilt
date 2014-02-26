@@ -20,6 +20,8 @@ QtGuiltPatchEditor::QtGuiltPatchEditor(QWidget *parent) :
   ui->toolButtonSave->setDefaultAction(ui->actionSave);
   ui->actionSave->setEnabled(false);
   ui->plainTextEdit->setReadOnly(true);
+  QFont f("monospace");
+  ui->plainTextEdit->setFont(f);
 
   connect(ui->plainTextEdit, SIGNAL(modificationChanged(bool)), ui->actionSave, SLOT(setEnabled(bool)));
   connect(p_watcher, SIGNAL(fileChanged(QString)), this, SLOT(setFile(QString)));
@@ -35,7 +37,7 @@ QtGuiltPatchEditor::~QtGuiltPatchEditor()
 
 void QtGuiltPatchEditor::setFile(const QString &filename, bool readonly, int index)
 {
-  setFile(filename);
+  setFile(filename, false);
   ui->plainTextEdit->setReadOnly(false);
   ui->statusBar->setText(tr(""));
   if(readonly)
@@ -59,16 +61,19 @@ void QtGuiltPatchEditor::setFile(const QString &filename, bool readonly, int ind
   ui->plainTextEdit->setTextCursor(cursor);
 }
 
-void QtGuiltPatchEditor::setFile(const QString &filename)
+void QtGuiltPatchEditor::setFile(const QString &filename, bool force)
 {
   QString old = m_filename;
   m_filename = filename;
   if(m_filename == "")
   {
     ui->plainTextEdit->setPlainText("");
-  }else if(old != m_filename)
+  }else if(force || old != m_filename)
   {
     QFile f(m_filename);
+    if(!p_watcher->files().isEmpty())
+      p_watcher->removePaths(p_watcher->files());
+    p_watcher->addPath(m_filename);
     if(f.open(QIODevice::ReadOnly))
     {
       m_content = f.readAll();
