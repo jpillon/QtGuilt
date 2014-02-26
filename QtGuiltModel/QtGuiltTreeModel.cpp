@@ -198,6 +198,12 @@ void QtGuiltTreeModel::notifyTopChanged(int i)
   emit topChanged(ind);
 }
 
+void QtGuiltTreeModel::repoChanged()
+{
+  beginResetModel();
+  endResetModel();
+}
+
 void QtGuiltTreeModel::editBegin() const
 {
   disconnect(p_root_item, SIGNAL(topChanged(int)), this, SLOT(notifyTopChanged(int)));

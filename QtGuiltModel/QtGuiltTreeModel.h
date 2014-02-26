@@ -76,7 +76,7 @@ class QtGuiltTreeModel : public QAbstractItemModel
     virtual void notifyEndRemoveRows ();
 
     virtual void notifyTopChanged(int i);
-
+    void repoChanged();
     void editBegin() const;
     void editEnd() const;
   private:

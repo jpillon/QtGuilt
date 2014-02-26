@@ -17,6 +17,7 @@ class QtGuiltTreeItem : public QObject
     };
 
     explicit QtGuiltTreeItem(QObject *parent = 0);
+    virtual ~QtGuiltTreeItem();
     void setTreeParent(QtGuiltTreeItem* parent);
     void addTreeChild(QtGuiltTreeItem* child);
     void deleteTreeChild(QtGuiltTreeItem* child);

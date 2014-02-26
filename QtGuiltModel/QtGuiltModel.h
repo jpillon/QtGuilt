@@ -324,6 +324,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
   signals:
     void seriesChanged();
     void statusChanged();
+    void repoAboutToChange();
     void repoChanged();
     void actionBegin(QString action);
     void actionProgress(int minval, int maxval, int currentval);

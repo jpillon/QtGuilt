@@ -866,6 +866,7 @@ bool QtGuiltModel::canAddPatchName(const QString &patchname)
 
 void QtGuiltModel::setRepo(const QString &newrepo)
 {
+  emit repoAboutToChange();
   //just in case...
   m_repo = newrepo;
   m_workingDir = m_repo;

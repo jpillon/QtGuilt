@@ -9,6 +9,11 @@ QtGuiltTreeItem::QtGuiltTreeItem(QObject *parent) :
   p_parent = dynamic_cast<QtGuiltTreeItem*>(parent);
 }
 
+QtGuiltTreeItem::~QtGuiltTreeItem()
+{
+  
+}
+
 void QtGuiltTreeItem::setTreeParent(QtGuiltTreeItem *parent)
 {
   p_parent = parent;
@@ -81,6 +86,11 @@ QList<QtGuiltTreeItem *> QtGuiltTreeItem::treeChildren() const
 
 void QtGuiltTreeItem::clearTree()
 {
+  QList<QtGuiltTreeItem *> children = treeChildren();
+  foreach(QtGuiltTreeItem* child, children)
+  {
+    deleteTreeChild(child);
+  }
   p_parent = NULL;
   clearTreeChildren();
   clearIndexes();
