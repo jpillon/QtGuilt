@@ -283,6 +283,7 @@ bool QtGuiltModel::merge(const QString &patchname1, const QString &patchname2)
 
 bool QtGuiltModel::rename(const QString &patchname, const QString &newname)
 {
+    qDebug() << patchname << newname;
   beginAction(__FUNCTION__);
   bool res = false;
   if(!saveTop())
@@ -290,19 +291,34 @@ bool QtGuiltModel::rename(const QString &patchname, const QString &newname)
     endAction(__FUNCTION__);
     return false;
   }
-
-  if(push(patchname))
+  if(m_onlyactive_series.contains(patchname))
   {
-    QStringList args;
-    args << "fork";
-    args << newname;
-    if(runGuiltCommand(args))
+    if(push(patchname))
     {
-      if(del(patchname))
+      QStringList args;
+      args << "fork";
+      args << newname;
+      if(runGuiltCommand(args))
       {
-        if(m_savedTop == patchname)
-          m_savedTop = newname;
-        res = true;
+        if(del(patchname))
+        {
+          if(m_savedTop == patchname)
+            m_savedTop = newname;
+          res = true;
+        }
+      }
+    }
+  } else
+  {
+    //Just rename in m_series and rename the patch file...
+    if(m_series.contains(patchname))
+    {
+      m_series.replace(m_series.indexOf(patchname), newname);
+      QFile f(patchFile(patchname));
+      if(f.copy(newname))
+      {
+        f.remove();
+        res = saveSeries();
       }
     }
   }
@@ -455,13 +471,16 @@ bool QtGuiltModel::setEnabled(const QString &patchname, bool enabled)
     endAction(__FUNCTION__);
     return false;
   }
-  if(push(prev))
+//  if(push(prev))
+  if(push(m_fakeBasePatch))
   {
+    QCoreApplication::processEvents();
     if(enabled)
       m_onlyactive_series.append(patchname);
     else
       m_onlyactive_series.removeOne(patchname);
     res = saveSeries();
+    QCoreApplication::processEvents();
   }
   res = restoreTop() && res;
   endAction(__FUNCTION__);
