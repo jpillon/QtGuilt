@@ -330,6 +330,7 @@ void QtGuiltWidget::setActions()
 
 void QtGuiltWidget::connectAction(QAction *action, const char *slot)
 {
+    action->setIconVisibleInMenu(true);
   connect(action, SIGNAL(triggered()), this, slot);
 }
 
