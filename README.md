@@ -2,7 +2,7 @@ QtGuilt
 =======
 GUI over guilt (quilt on top of git)
 
-Warning : This is alpha software. 
+Warning : This is alpha software and it may destroy your git/guilt repo ! 
 -------
  
 This project implements a gui over the guilt utility and adds some additionnal functionnalities. 
