@@ -13,8 +13,8 @@ The visualisation works well, but everything has not been fully tested for now a
 
 
 ### Build (build out of sources):
-    mkdir GtGuilt-build
-    cd GtGuilt-build
+    mkdir QtGuilt-build
+    cd QtGuilt-build
     qmake PATH/TO/SOURCES/QtGuilt.pro
     make
 ### For installing in custom location, this is the same procedure except the qmake step : 
