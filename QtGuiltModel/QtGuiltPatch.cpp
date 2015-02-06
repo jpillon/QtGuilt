@@ -5,7 +5,6 @@
 #include <QtGuiltPatchFile.h>
 #include <QtGuiltTreeRootItem.h>
 #include <QtGui/QIcon>
-#include <QApplication>
 #include <QFont>
 #include <QDebug>
 
@@ -166,7 +165,7 @@ QVariant QtGuiltPatch::data(int column, int role) const
       case Qt::FontRole:
         if(isTop() && isModified())
         {
-          QFont f = QApplication::font();
+          QFont f;
           f.setWeight(QFont::Bold);
           res = f;
         }

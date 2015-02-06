@@ -10,4 +10,3 @@ TEMPLATE = lib
 include(../config.qmake)
 include(QtGuiltModel.prf)
 DEFINES += QTGUILTMODEL_LIBRARY
-

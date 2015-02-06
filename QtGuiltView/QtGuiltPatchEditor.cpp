@@ -97,7 +97,7 @@ void QtGuiltPatchEditor::save()
   QFile f(m_filename);
   if(f.open(QIODevice::WriteOnly))
   {
-    f.write((m_header + ui->plainTextEdit->toPlainText()).toAscii());
+    f.write((m_header + ui->plainTextEdit->toPlainText()).toLatin1());
     f.close();
   }
   ui->actionSave->setEnabled(false);
