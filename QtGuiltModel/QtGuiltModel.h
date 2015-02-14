@@ -272,6 +272,18 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      *
      */
     bool files(const QString& patchname, QStringList& list);
+
+    /**
+     * @brief Checks if current patch it top
+     * @return true if it is
+     */
+    bool canPush() const;
+
+    /**
+     * @brief checks is nothing is applied
+     * @return true if nothin is applied
+     */
+    bool canPop() const;
 /*******************Utils***********************/
 
     /**

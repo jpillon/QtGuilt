@@ -697,6 +697,29 @@ bool QtGuiltModel::files(const QString &patchname, QStringList &list)
   return true;
 }
 
+bool QtGuiltModel::canPush() const
+{
+    QString t;
+    QString n;
+    top(t);
+    next(t, n);
+    return !n.isEmpty();
+}
+
+bool QtGuiltModel::canPop() const
+{
+    QString t;
+    top(t);
+    if(t != m_fakeBasePatch)
+    {
+        //check if it is enabled
+        bool en;
+        isEnabled(t, en);
+        return en;
+    }
+    return false;
+}
+
 bool QtGuiltModel::temporaryPatchName(QString &name)
 {
   beginAction(__FUNCTION__);

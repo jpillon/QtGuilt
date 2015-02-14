@@ -63,9 +63,9 @@ void QtGuiltWidget::contextualMenuRequested(const QPoint &p)
     ui->actionPush->setDisabled(patch->isApplied());
     ui->actionMerge_on_Top->setDisabled(patch->isApplied());
     p_contextualMenu->exec(QCursor::pos());
-    ui->actionPop->setEnabled(true);
-    ui->actionPush->setEnabled(true);
   }
+  ui->actionPop->setEnabled(p_model->guiltModel()->canPop());
+  ui->actionPush->setEnabled(p_model->guiltModel()->canPush());
 }
 
 void QtGuiltWidget::begin(const QString &act)
@@ -80,6 +80,11 @@ void QtGuiltWidget::end(const QString &act)
   while( QApplication::overrideCursor()) //Just in case it is set multiple times...
       QApplication::restoreOverrideCursor();
   ui->statusBar->setText("");
+
+  p_model->guiltModel()->blockSignals(true);
+  ui->actionPop->setEnabled(p_model->guiltModel()->canPop());
+  ui->actionPush->setEnabled(p_model->guiltModel()->canPush());
+  p_model->guiltModel()->blockSignals(false);
 }
 
 void QtGuiltWidget::activate()
@@ -111,6 +116,9 @@ void QtGuiltWidget::openRepo()
     p_model->guiltModel()->setRepo(repo);
   }
   m_fromContextual = false;
+
+  ui->actionPop->setEnabled(p_model->guiltModel()->canPop());
+  ui->actionPush->setEnabled(p_model->guiltModel()->canPush());
 }
 
 void QtGuiltWidget::initRepo()
