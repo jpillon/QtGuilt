@@ -553,7 +553,7 @@ bool QtGuiltModel::discard()
   return res;
 }
 
-bool QtGuiltModel::unrefreshed(QString &content, bool silent)
+bool QtGuiltModel::unrefreshed(QString &content, bool silent) const
 {
   if(!silent)
     beginAction(__FUNCTION__);
@@ -568,7 +568,7 @@ bool QtGuiltModel::unrefreshed(QString &content, bool silent)
   return res;
 }
 
-bool QtGuiltModel::series(QStringList &list, bool onlyactive)
+bool QtGuiltModel::series(QStringList &list, bool onlyactive) const
 {
   beginAction(__FUNCTION__);
   list.clear();
@@ -580,7 +580,7 @@ bool QtGuiltModel::series(QStringList &list, bool onlyactive)
   return true;
 }
 
-bool QtGuiltModel::applied(QStringList &list)
+bool QtGuiltModel::applied(QStringList &list) const
 {
   beginAction(__FUNCTION__);
   list = m_applied;
@@ -588,7 +588,7 @@ bool QtGuiltModel::applied(QStringList &list)
   return true;
 }
 
-bool QtGuiltModel::top(QString &patchname)
+bool QtGuiltModel::top(QString &patchname) const
 {
   beginAction(__FUNCTION__);
   QStringList a;
@@ -605,7 +605,7 @@ bool QtGuiltModel::top(QString &patchname)
   return res;
 }
 
-bool QtGuiltModel::next(const QString &patchname, QString &nextpatch, bool active)
+bool QtGuiltModel::next(const QString &patchname, QString &nextpatch, bool active) const
 {
   beginAction(__FUNCTION__);
   bool res = false;
@@ -639,7 +639,7 @@ bool QtGuiltModel::next(const QString &patchname, QString &nextpatch, bool activ
   return res;
 }
 
-bool QtGuiltModel::previous(const QString &patchname, QString &previouspatch, bool active)
+bool QtGuiltModel::previous(const QString &patchname, QString &previouspatch, bool active) const
 {
   beginAction(__FUNCTION__);
   QStringList s;
@@ -674,7 +674,7 @@ bool QtGuiltModel::previous(const QString &patchname, QString &previouspatch, bo
   return res;
 }
 
-bool QtGuiltModel::isEnabled(const QString &patchname, bool &enabled)
+bool QtGuiltModel::isEnabled(const QString &patchname, bool &enabled) const
 {
   beginAction(__FUNCTION__);
   bool res = false;
@@ -688,7 +688,7 @@ bool QtGuiltModel::isEnabled(const QString &patchname, bool &enabled)
   return res;
 }
 
-bool QtGuiltModel::files(const QString &patchname, QStringList &list)
+bool QtGuiltModel::files(const QString &patchname, QStringList &list) const
 {
   beginAction(__FUNCTION__);
   QtGuiltPatch p(patchFile(patchname));
@@ -720,7 +720,7 @@ bool QtGuiltModel::canPop() const
     return false;
 }
 
-bool QtGuiltModel::temporaryPatchName(QString &name)
+bool QtGuiltModel::temporaryPatchName(QString &name) const
 {
   beginAction(__FUNCTION__);
   QStringList s;
@@ -738,19 +738,19 @@ bool QtGuiltModel::temporaryPatchName(QString &name)
   return true;
 }
 
-bool QtGuiltModel::isGitRepo()
+bool QtGuiltModel::isGitRepo() const
 {
   QDir d(gitDir());
   return d.exists();
 }
 
-bool QtGuiltModel::isSVNRepo()
+bool QtGuiltModel::isSVNRepo() const
 {
   QDir d(svnDir());
   return d.exists();
 }
 
-bool QtGuiltModel::isGuiltRepo()
+bool QtGuiltModel::isGuiltRepo() const
 {
   QDir d(guiltDir());
   return d.exists();
@@ -794,22 +794,22 @@ bool QtGuiltModel::saveSeries()
   return false;
 }
 
-QString QtGuiltModel::guiltDir()
+QString QtGuiltModel::guiltDir() const
 {
   return gitDir() + QDir::separator() + "patches" + QDir::separator() + branch();
 }
 
-QString QtGuiltModel::gitDir()
+QString QtGuiltModel::gitDir() const
 {
   return m_repo + QDir::separator() + ".git";
 }
 
-QString QtGuiltModel::svnDir()
+QString QtGuiltModel::svnDir() const
 {
   return m_repo + QDir::separator() + ".svn";
 }
 
-QString QtGuiltModel::branch()
+QString QtGuiltModel::branch() const
 {;
   QStringList r;
   if(!runGitCommand(QStringList() << "branch"))
@@ -823,22 +823,22 @@ QString QtGuiltModel::branch()
   return "";
 }
 
-QString QtGuiltModel::patchFile(const QString &patchname)
+QString QtGuiltModel::patchFile(const QString &patchname) const
 {
   return guiltDir() + QDir::separator() + patchname;
 }
 
-QString QtGuiltModel::seriesFile()
+QString QtGuiltModel::seriesFile() const
 {
   return guiltDir() + QDir::separator() + "series";
 }
 
-QString QtGuiltModel::statusFile()
+QString QtGuiltModel::statusFile() const
 {
   return guiltDir() + QDir::separator() + "status";
 }
 
-QString QtGuiltModel::repository()
+QString QtGuiltModel::repository() const
 {
   return m_repo;
 }
@@ -870,7 +870,7 @@ bool QtGuiltModel::restoreTop()
   return true;
 }
 
-void QtGuiltModel::beginAction(const QString &action)
+void QtGuiltModel::beginAction(const QString &action) const
 {
   if(m_naction++ == 0)
   {
@@ -879,7 +879,7 @@ void QtGuiltModel::beginAction(const QString &action)
   }
 }
 
-void QtGuiltModel::progressAction(int minval, int maxval, int currentval)
+void QtGuiltModel::progressAction(int minval, int maxval, int currentval) const
 {
   if(m_naction == 1)
   {
@@ -887,7 +887,7 @@ void QtGuiltModel::progressAction(int minval, int maxval, int currentval)
   }
 }
 
-void QtGuiltModel::endAction(const QString &action)
+void QtGuiltModel::endAction(const QString &action) const
 {
   if(--m_naction == 0)
   {
@@ -897,7 +897,7 @@ void QtGuiltModel::endAction(const QString &action)
   }
 }
 
-bool QtGuiltModel::canAddPatchName(const QString &patchname)
+bool QtGuiltModel::canAddPatchName(const QString &patchname) const
 {
   if(m_series.contains(patchname))
     return false;

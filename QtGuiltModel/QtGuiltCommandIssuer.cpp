@@ -54,9 +54,9 @@ QStringList QtGuiltCommandIssuer::lastStdoutList() const
   return lastStdout().split("\n", QString::SkipEmptyParts);
 }
 
-bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList &args)
+bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList &args) const
 {
-  blockSignals(true);
+  const_cast<QtGuiltCommandIssuer*>(this)->blockSignals(true);
   QProcess process;
   bool result;
 
@@ -72,14 +72,14 @@ bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList 
   m_lastStderr = process.readAllStandardError();
   if(!result)
     m_lastError = m_lastStderr;
-  blockSignals(false);
+  const_cast<QtGuiltCommandIssuer*>(this)->blockSignals(false);
   if(m_echoCommand)           qDebug() << "Cmd::" << program << args;
   if(!m_stdSilent)            qDebug() << "Std::" << m_lastStdout;
   if(!result && !m_errSilent) qDebug() << "Err::" << m_lastStderr;
   return result;
 }
 
-bool QtGuiltCommandIssuer::runGuiltCommand(const QStringList &args)
+bool QtGuiltCommandIssuer::runGuiltCommand(const QStringList &args) const
 {
   bool result;
   result = runCommand(m_guiltPath, args);
@@ -97,14 +97,14 @@ bool QtGuiltCommandIssuer::runGuiltCommand(const QStringList &args)
   return result;
 }
 
-bool QtGuiltCommandIssuer::runGitCommand(const QStringList &args)
+bool QtGuiltCommandIssuer::runGitCommand(const QStringList &args) const
 {
   bool result;
   result = runCommand(m_gitPath, args);
   return result;
 }
 
-bool QtGuiltCommandIssuer::runSVNCommand(const QStringList &args)
+bool QtGuiltCommandIssuer::runSVNCommand(const QStringList &args) const
 {
   bool result;
   result = runCommand(m_svnPath, args);

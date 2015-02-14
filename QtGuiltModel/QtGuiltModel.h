@@ -215,7 +215,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param[out] content the current unrefreshed modifications (in patch form)
      * @return true if command succeeded, false otherwise
      */
-    bool unrefreshed(QString& content, bool silent = false);
+    bool unrefreshed(QString& content, bool silent = false) const;
 
     /**
      * @brief Retrieves the available patch list
@@ -223,21 +223,21 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param onlyactive if true, only retrieve active patches
      * @return true if command succeeded, false otherwise
      */
-    bool series(QStringList& list, bool onlyactive = false);
+    bool series(QStringList& list, bool onlyactive = false) const;
 
     /**
      * @brief Retrieves the current applied patch list
      * @param[out] list the current applied patch list
      * @return true if command succeeded, false otherwise
      */
-    bool applied(QStringList& list);
+    bool applied(QStringList& list) const;
 
     /**
      * @brief Retrieves top patchname
      * @param[out] patchname the top patch name
      * @return true if command succeeded, false otherwise
      */
-    bool top(QString& patchname);
+    bool top(QString& patchname) const;
 
     /**
      * @brief Retrieves the next active patchname
@@ -246,7 +246,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param active set to true if nextpatch must be active
      * @return true if command succeeded, false otherwise
      */
-    bool next(const QString& patchname, QString& nextpatch, bool active = true);
+    bool next(const QString& patchname, QString& nextpatch, bool active = true) const;
 
     /**
      * @brief Retrieves the previous active patchname
@@ -254,7 +254,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param[out] previouspatch the previous patch of patchname (empty if patchname is root)
      * @return true if command succeeded, false otherwise
      */
-    bool previous(const QString& patchname, QString& previouspatch, bool active = true);
+    bool previous(const QString& patchname, QString& previouspatch, bool active = true) const;
 
     /**
      * @brief Checks if patchname is enabled or not
@@ -262,7 +262,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param[out] enabled patchname is enabled or not
      * @return true if command succeeded, false otherwise
      */
-    bool isEnabled(const QString& patchname, bool& enabled);
+    bool isEnabled(const QString& patchname, bool& enabled) const;
 
     /**
      * @brief Retrieves the list of files modified by given patch
@@ -271,7 +271,7 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @return true if command succeeded, false otherwise
      *
      */
-    bool files(const QString& patchname, QStringList& list);
+    bool files(const QString& patchname, QStringList& list) const;
 
     /**
      * @brief Checks if current patch it top
@@ -291,25 +291,25 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
      * @param[out] name the new temporary patch name
      * @return true if command succeeded, false otherwise
      */
-    bool temporaryPatchName(QString& name);
+    bool temporaryPatchName(QString& name) const;
 
     /**
      * @brief checks if patch is a git repository
      * @return true if it is
      */
-    bool isGitRepo();
+    bool isGitRepo() const;
 
     /**
      * @brief checks if patch is a svn local copy
      * @return true if it is
      */
-    bool isSVNRepo();
+    bool isSVNRepo() const;
 
     /**
      * @brief checks if patch is a guilt repository
      * @return true if it is
      */
-    bool isGuiltRepo();
+    bool isGuiltRepo() const;
 
     /**
      * @brief Fills the series file accodring to inner data
@@ -318,14 +318,14 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
     bool saveSeries();
 
     void tmp();
-    QString guiltDir();
-    QString gitDir();
-    QString svnDir();
-    QString branch();
-    QString patchFile(const QString& patchname);
-    QString seriesFile();
-    QString statusFile();
-    QString repository();
+    QString guiltDir() const;
+    QString gitDir() const;
+    QString svnDir() const;
+    QString branch() const;
+    QString patchFile(const QString& patchname) const;
+    QString seriesFile() const;
+    QString statusFile() const;
+    QString repository() const;
   public slots:
     void setRepo(const QString& newrepo);
     void updateEverything();
@@ -338,23 +338,23 @@ class QTGUILTMODELSHARED_EXPORT QtGuiltModel : public QtGuiltCommandIssuer
     void statusChanged();
     void repoAboutToChange();
     void repoChanged();
-    void actionBegin(QString action);
-    void actionProgress(int minval, int maxval, int currentval);
-    void actionEnd(QString action);
+    void actionBegin(QString action) const;
+    void actionProgress(int minval, int maxval, int currentval) const;
+    void actionEnd(QString action) const;
     void modifiedChanged(bool modified);
   private:
     inline bool saveTop();
     inline bool restoreTop();
-    inline void beginAction(const QString& action);
-    inline void progressAction(int minval, int maxval, int currentval);
-    inline void endAction(const QString& action);
-    bool canAddPatchName(const QString& patchname);
+    inline void beginAction(const QString& action) const;
+    inline void progressAction(int minval, int maxval, int currentval) const;
+    inline void endAction(const QString& action) const;
+    bool canAddPatchName(const QString& patchname) const;
   private:
-    unsigned int        m_naction;
+    mutable unsigned int m_naction;
     unsigned int        m_nsave;
     QString             m_savedTop;
     bool                m_modified;
-    QTimer*             p_modificationTimer;
+    mutable QTimer*     p_modificationTimer;
     QString             m_repo;
     QStringList         m_series;
     QStringList         m_onlyactive_series;

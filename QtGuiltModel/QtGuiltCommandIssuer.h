@@ -58,28 +58,28 @@ class QtGuiltCommandIssuer : public QObject
      * @param args the arguments
      * @return true if command went OK, false otherwise
      */
-    bool runCommand(const QString& program, const QStringList& args);
+    bool runCommand(const QString& program, const QStringList& args) const;
 
     /**
      * @brief Runs a guilt command
      * @param args the arguments to give to guilt
      * @return true if command went OK, false otherwise
      */
-    bool runGuiltCommand(const QStringList& args);
+    bool runGuiltCommand(const QStringList& args) const;
 
     /**
      * @brief Runs a git command
      * @param args the arguments to give to git
      * @return true if command went OK, false otherwise
      */
-    bool runGitCommand(const QStringList& args);
+    bool runGitCommand(const QStringList& args) const;
 
     /**
      * @brief Runs a svn command
      * @param args the arguments to give to svn
      * @return true if command went OK, false otherwise
      */
-    bool runSVNCommand(const QStringList& args);
+    bool runSVNCommand(const QStringList& args) const;
 
     /**
      * @brief Sets the project directory
@@ -135,13 +135,13 @@ class QtGuiltCommandIssuer : public QObject
       */
     void setEchoCommand(const bool& echo = true);
   protected:
-    QString m_lastError;    /**< @brief the last error string */
+    mutable QString m_lastError;    /**< @brief the last error string */
     QString m_gitPath;      /**< @brief path to git */
     QString m_guiltPath;    /**< @brief path to guilt */
     QString m_svnPath;      /**< @brief path to svn */
     QString m_workingDir;   /**< @brief path to current project dir */
-    QString m_lastStdout;   /**< @brief content of last command standard output */
-    QString m_lastStderr;   /**< @brief content of last command standard error */
+    mutable QString m_lastStdout;   /**< @brief content of last command standard output */
+    mutable QString m_lastStderr;   /**< @brief content of last command standard error */
     bool    m_errSilent;    /**< @brief if false, prints error message when fail */
     bool    m_stdSilent;    /**< @brief if false, prints standard output */
     bool    m_echoCommand;  /**< @brief if true, prints the issued command */
