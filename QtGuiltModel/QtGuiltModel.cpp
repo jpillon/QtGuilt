@@ -167,6 +167,15 @@ bool QtGuiltModel::push(const QString &patchname, const bool force)
             {
               if(s.indexOf(patchname) >= s.indexOf(t))
               {
+                QString pf = patchFile(patchname);
+                QFile f;
+                f.setFileName(pf);
+                if(f.exists() && f.open(QIODevice::ReadOnly))
+                {
+                    QString content = f.readAll();
+                    f.close();
+                    m_patchFileEmpty = content.trimmed().isEmpty();
+                }
                 res = runGuiltCommand(QStringList() << "push" << patchname);
               }
               else

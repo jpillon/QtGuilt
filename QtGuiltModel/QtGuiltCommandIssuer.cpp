@@ -33,7 +33,8 @@ QtGuiltCommandIssuer::QtGuiltCommandIssuer(QObject *parent) :
   m_lastStderr(""),
   m_errSilent(true),
   m_stdSilent(true),
-  m_echoCommand(false)
+  m_echoCommand(false),
+  m_patchFileEmpty(false)
 {
 }
 
@@ -83,17 +84,22 @@ bool QtGuiltCommandIssuer::runGuiltCommand(const QStringList &args) const
 {
   bool result;
   result = runCommand(m_guiltPath, args);
+  
+
   if(m_lastStderr.contains("fatal:"))
   {
-    result = false;
-    if(!result && !m_errSilent) qDebug() << m_lastStderr;
-  }
-  if(m_lastStderr.contains("unrecognized input"))
-  { //happens when patch is empty... so not an error
-    result = true;
+      if(args.contains("push") && m_patchFileEmpty)
+      { //happens when patch is empty... so not an error
+        qDebug() << "Patchfile is empty, don't cry...";
+      } else
+      {
+        result = false;
+        if(!result && !m_errSilent) qDebug() << m_lastStderr;
+      }
   }
   if(!result)
     m_lastError = m_lastStderr;
+  m_patchFileEmpty = false;
   return result;
 }
 

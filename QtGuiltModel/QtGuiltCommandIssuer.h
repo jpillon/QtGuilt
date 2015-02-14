@@ -145,6 +145,7 @@ class QtGuiltCommandIssuer : public QObject
     bool    m_errSilent;    /**< @brief if false, prints error message when fail */
     bool    m_stdSilent;    /**< @brief if false, prints standard output */
     bool    m_echoCommand;  /**< @brief if true, prints the issued command */
+    mutable bool    m_patchFileEmpty; /** @brief do not complain if ush and patch file is empty...*/
 };
 
 #endif // QTGUILTCOMMANDISSUER_H
