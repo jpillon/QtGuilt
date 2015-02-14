@@ -105,6 +105,7 @@ bool QtGuiltModel::createRepo(const QString &path)
 
 bool QtGuiltModel::associate()
 {
+  deAssociate();
   connect(&m_seriesWatcher, SIGNAL(fileChanged(QString)), this, SLOT(updateSeries(QString)), Qt::DirectConnection);
   connect(&m_statusWatcher, SIGNAL(fileChanged(QString)), this, SLOT(updateStatus(QString)), Qt::DirectConnection);
 //  connect(&m_guiltWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(updateEverything()), Qt::DirectConnection);
