@@ -184,6 +184,7 @@ bool QtGuiltModel::push(const QString &patchname, const bool force)
       }
     }
   }
+  updateEverything();
   endAction(__FUNCTION__);
   return res;
 }
@@ -209,6 +210,7 @@ bool QtGuiltModel::pop(const QString &patchname, const bool force)
       res = true;
     }
   }
+  updateEverything();
   endAction(__FUNCTION__);
   return res;
 }
