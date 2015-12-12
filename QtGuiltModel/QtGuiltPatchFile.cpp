@@ -155,7 +155,7 @@ void QtGuiltPatchFile::updateTreeChildren()
     QString part = m_content.mid(ats[i], ats[i+1] - ats[i]);
     if(part.startsWith("@@"))
     {
-      addTreeChild(new QtGuiltPatchChunk(part, ats[i] + charIndex(), this));
+      addTreeChild(new QtGuiltPatchChunk(ats[i] + charIndex(), ats[i+1] - ats[i], this));
     }
   }
 }

@@ -1,13 +1,20 @@
 #include "QtGuiltPatchChunk.h"
+#include <QtGuiltPatchFile.h>
 #include <QStringList>
 
-QtGuiltPatchChunk::QtGuiltPatchChunk(const QString &content, int startIndex, QtGuiltPatchFile *patchFile):
+QtGuiltPatchChunk::QtGuiltPatchChunk(int startIndex, int endIndex, QtGuiltPatchFile *patchFile):
   QtGuiltTreeItem((QObject*)patchFile),
-  m_content(content),
-  m_startIndex(startIndex)
+  m_startIndex(startIndex),
+  m_endIndex(endIndex),
+  ptr_patchFile(patchFile)
 {
   m_type = PatchFileChunk;
-  m_presentation = presentation(m_content);
+  m_presentation = presentation(content());
+}
+
+QString QtGuiltPatchChunk::content() const
+{
+    return ptr_patchFile->content().mid(m_startIndex, m_endIndex);
 }
 
 QVariant QtGuiltPatchChunk::data(int column, int role) const

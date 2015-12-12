@@ -51,12 +51,12 @@ QString QtGuiltPatch::header() const
 
 QString QtGuiltPatch::content() const
 {
-  QString res = header();
-  foreach(QtGuiltTreeItem* item, treeChildren())
+  QString res;
+  QFile f(m_fileinfo.absoluteFilePath());
+  if(f.open(QIODevice::ReadOnly))
   {
-    QtGuiltPatchFile* f = dynamic_cast<QtGuiltPatchFile*>(item);
-    if(f)
-      res += f->content();
+      res = f.readAll();
+      f.close();
   }
   return res;
 }
