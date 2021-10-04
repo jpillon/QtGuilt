@@ -41,6 +41,8 @@ class QtGuiltTest : public QObject
     void initTestCase();
     void testPatchFile();
     void testPatchFile_data();
+    void testExtract();
+    void testExtract_data();
     void testModel2();
     void testModel2_data();
     void testCommandIssuer();

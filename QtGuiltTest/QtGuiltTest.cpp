@@ -204,6 +204,46 @@ void QtGuiltTest::testModel_data()
   }
 }
 
+void QtGuiltTest::testExtract()
+{
+  QFETCH(QString, patchPath);
+  QFileInfo f(patchPath);
+
+  QString repo = unique();
+  QStringList tmp;
+  p_model->createRepo(repo);
+  QVERIFY(p_model->import(patchPath));
+  QCoreApplication::processEvents();
+  qDebug() << p_model->lastStderr();
+  qDebug() << p_model->lastStdout();
+  QVERIFY(p_model->series(tmp));
+  qDebug() << f.fileName();
+  QVERIFY(tmp.contains(f.fileName()));
+  QStringList files;
+  QVERIFY(p_model->files(f.fileName(), files));
+  QVERIFY(files.size() > 0);
+
+  foreach(QString filename, files) {
+    QVERIFY(p_model->extract(f.fileName(), filename));
+    QVERIFY(p_model->series(tmp));
+    qDebug() << tmp;
+  }
+
+  QVERIFY(p_model->runGuiltCommand(QStringList() << "push" << "-a"));
+  QCoreApplication::processEvents();
+  QVERIFY(p_model->applied(tmp));
+  qDebug() << tmp;
+  p_model->deAssociate();
+  removeDir(repo);
+}
+
+void QtGuiltTest::testExtract_data()
+{
+  QTest::addColumn<QString>("patchPath");
+
+  QTest::newRow("0") << SRCDIR"/data/test.patch";
+}
+
 void QtGuiltTest::testModel2()
 {
   QFETCH(QString, patchPath);
