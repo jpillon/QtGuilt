@@ -41,5 +41,5 @@ QString QtGuiltPatchChunk::presentation(const QString &content) const
 
 int QtGuiltPatchChunk::charIndex() const
 {
-  return m_startIndex;
+  return m_startIndex + ptr_patchFile->charIndex();
 }

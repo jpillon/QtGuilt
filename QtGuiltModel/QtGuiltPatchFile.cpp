@@ -150,12 +150,12 @@ void QtGuiltPatchFile::updateTreeChildren()
     found = m_content.indexOf(QRegExp("[\r\n]@@"), ats.last())+1;
   } while(found > ats.last());
   ats.append(m_content.size()-1);
-  for(int i=0;i<ats.size()-1;i++)
+  for(int i=1;i<ats.size()-1;i++)
   {
     QString part = m_content.mid(ats[i], ats[i+1] - ats[i]);
     if(part.startsWith("@@"))
     {
-      addTreeChild(new QtGuiltPatchChunk(ats[i] + charIndex(), ats[i+1] - ats[i], this));
+      addTreeChild(new QtGuiltPatchChunk(ats[i], ats[i+1] - ats[i], this));
     }
   }
 }
