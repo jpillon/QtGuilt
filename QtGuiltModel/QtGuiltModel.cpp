@@ -986,7 +986,7 @@ void QtGuiltModel::updateSeries(QString file)
     foreach (QString line, content) {
       line = line.trimmed();
       bool active = !line.startsWith("#");
-      QStringList tmp = line.split("#", QString::SkipEmptyParts);
+      QStringList tmp = line.split("#", Qt::SkipEmptyParts);
       if(tmp.size() > 0 && QFile::exists(patchFile(tmp[0])))
       {
         newSeries.append(tmp[0]);

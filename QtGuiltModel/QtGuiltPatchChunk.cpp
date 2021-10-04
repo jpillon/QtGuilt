@@ -36,7 +36,7 @@ QVariant QtGuiltPatchChunk::data(int column, int role) const
 
 QString QtGuiltPatchChunk::presentation(const QString &content) const
 {
-  return content.split("\n", QString::SkipEmptyParts)[0].trimmed();
+  return content.split("\n", Qt::SkipEmptyParts)[0].trimmed();
 }
 
 int QtGuiltPatchChunk::charIndex() const
