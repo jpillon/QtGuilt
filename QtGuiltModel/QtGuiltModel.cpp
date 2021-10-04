@@ -820,14 +820,14 @@ QString QtGuiltModel::svnDir() const
 }
 
 QString QtGuiltModel::branch() const
-{;
+{
   QStringList r;
   if(!runGitCommand(QStringList() << "branch"))
     return "";
   r = lastStdoutList();
   foreach (QString b, r) {
     if(b.startsWith("*")){
-      return b.replace("*", "").trimmed();
+      return b.replace("*", "").replace("guilt/", "").trimmed();
     }
   }
   return "";
