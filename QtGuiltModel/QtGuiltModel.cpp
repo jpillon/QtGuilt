@@ -518,7 +518,7 @@ bool QtGuiltModel::addFiles(const QString &patchname, const QStringList &files)
     }
     if(runGuiltCommand(args))
     {
-      res = true;
+      res = refresh();
     }
   }
   res = restoreTop() && res;
