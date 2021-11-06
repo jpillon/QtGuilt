@@ -52,7 +52,7 @@ QString QtGuiltCommandIssuer::lastStdout() const
 
 QStringList QtGuiltCommandIssuer::lastStdoutList() const
 {
-  return lastStdout().split("\n", QString::SkipEmptyParts);
+  return lastStdout().split("\n", Qt::SkipEmptyParts);
 }
 
 bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList &args) const
