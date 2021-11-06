@@ -350,6 +350,7 @@ bool QtGuiltModel::explode(const QString &patchname)
     endAction(__FUNCTION__);
     return false;
   }
+  blockSignals(true);
   if(files(patchname, l))
   {
     res = true;
@@ -358,6 +359,7 @@ bool QtGuiltModel::explode(const QString &patchname)
         res = false;
     }
   }
+  blockSignals(false);
   res = restoreTop() && res;
   endAction(__FUNCTION__);
   return res;
