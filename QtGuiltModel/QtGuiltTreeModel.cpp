@@ -54,7 +54,6 @@ QVariant QtGuiltTreeModel::data(const QModelIndex &index, int role) const
 
 bool QtGuiltTreeModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-  qDebug() << index << value << role;
   bool result = false;
   QtGuiltPatch* patch = dynamic_cast<QtGuiltPatch*>((QtGuiltTreeItem*)index.internalPointer());
   if(role == Qt::DisplayRole)

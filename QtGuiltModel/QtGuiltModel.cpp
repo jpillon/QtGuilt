@@ -223,7 +223,6 @@ bool QtGuiltModel::pop(const QString &patchname, const bool force)
 bool QtGuiltModel::move(const QString &patchname, const QString &where)
 {
     beginAction(__FUNCTION__);
-    qDebug() << patchname << " to " << where;
     bool res = false;
     if(!saveTop())
     {
@@ -295,7 +294,6 @@ bool QtGuiltModel::merge(const QString &patchname1, const QString &patchname2)
 
 bool QtGuiltModel::rename(const QString &patchname, const QString &newname)
 {
-    qDebug() << patchname << newname;
   beginAction(__FUNCTION__);
   bool res = false;
   if(!saveTop())
