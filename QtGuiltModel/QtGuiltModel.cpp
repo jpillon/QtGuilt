@@ -227,32 +227,37 @@ bool QtGuiltModel::pop(const QString &patchname, const bool force)
 
 bool QtGuiltModel::move(const QString &patchname, const QString &where)
 {
-  beginAction(__FUNCTION__);
-  bool res = false;
-  if(!saveTop())
-  {
-    endAction(__FUNCTION__);
-    return false;
-  }
-  if(runGuiltCommand(QStringList() << "pop" << "-a"))
-  {
-    QStringList tmp;
-    if(series(tmp))
+    beginAction(__FUNCTION__);
+    qDebug() << patchname << " to " << where;
+    bool res = false;
+    if(!saveTop())
     {
-      if(tmp.removeOne(patchname))
-      {
-        if(where.isEmpty())
-          tmp.append(patchname);
-        else
-          tmp.insert(tmp.indexOf(where), patchname);
-        m_series = tmp;
-        res = saveSeries();
-      }
+        endAction(__FUNCTION__);
+        return false;
     }
-  }
-  res = restoreTop() && res;
-  endAction(__FUNCTION__);
-  return res;
+    QStringList tmp;
+    if(series(tmp)) {
+        QString patchToPop;
+        if(where.isEmpty())
+            patchToPop = patchname;
+        else
+            patchToPop = tmp.indexOf(where) < tmp.indexOf(patchname)?where:patchname;
+        if(pop(patchToPop))
+        {
+            if(tmp.removeOne(patchname))
+            {
+                if(where.isEmpty())
+                    tmp.append(patchname);
+                else
+                    tmp.insert(tmp.indexOf(where), patchname);
+                m_series = tmp;
+                res = saveSeries();
+            }
+        }
+        res = restoreTop() && res;
+    }
+    endAction(__FUNCTION__);
+    return res;
 }
 
 bool QtGuiltModel::merge(const QString &patchname1, const QString &patchname2)
