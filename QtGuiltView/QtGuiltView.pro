@@ -6,7 +6,7 @@
 
 TARGET = QtGuiltView
 TEMPLATE = lib
-
+QT += svg
 include(../config.qmake)
 include(QtGuiltView.prf)
 DEFINES += QTGUILTVIEW_LIBRARY

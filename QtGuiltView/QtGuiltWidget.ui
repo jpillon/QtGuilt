@@ -266,6 +266,14 @@
     <string>Copy Path to ClipBoard</string>
    </property>
   </action>
+  <action name="actionGraph">
+   <property name="text">
+    <string>Graph</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Patches graph</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../QtGuiltModel/QtGuiltIcons.qrc"/>

@@ -16,6 +16,7 @@ class QtGuiltTreeModel;
 class QtGuiltPatch;
 class QtGuiltPatchFile;
 class QtGuiltPatchChunk;
+class QtGuiltGraphDialog;
 
 class QtGuiltWidget : public QWidget
 {
@@ -49,6 +50,7 @@ class QtGuiltWidget : public QWidget
     void newPatch();
     void saveHeader();
     void diffz();
+    void showGraph();
 
     void selectionChanged(QItemSelection selected,QItemSelection deselected);
   signals:
@@ -72,6 +74,7 @@ class QtGuiltWidget : public QWidget
     QMenu* p_contextualMenu;
     Ui::QtGuiltWidget *ui;
     QToolBar* p_toolbar;
+    QtGuiltGraphDialog* p_graphDialog;
 };
 
 #endif // QTGUILTWIDGET_H

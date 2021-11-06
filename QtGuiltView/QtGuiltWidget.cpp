@@ -7,6 +7,7 @@
 #include <QtGuiltModel/QtGuiltPatchChunk.h>
 #include <QtGuiltModel/QtGuiltAskerModel.h>
 #include <QtGuiltView/QtGuiltGUIAsker.h>
+#include <QtGuiltView/QtGuiltGraphDialog.h>
 #include <QToolBar>
 #include <QGridLayout>
 #include <QDebug>
@@ -34,6 +35,9 @@ QtGuiltWidget::QtGuiltWidget(QWidget *parent) :
   ui->treeView->setDropIndicatorShown(true);
   ui->treeView->setDragDropOverwriteMode(false);
   ui->treeView->setDragDropMode(QAbstractItemView::InternalMove);
+
+  p_graphDialog = new QtGuiltGraphDialog(this);
+  p_graphDialog->hide();
 
   setActions();
   setConnections();
@@ -245,6 +249,15 @@ void QtGuiltWidget::diffz()
   m_fromContextual = false;
 }
 
+void QtGuiltWidget::showGraph()
+{
+    QtGuiltCommandIssuer issuer;
+    issuer.runGuiltCommand(QStringList() << "graph");
+    QString dotGraph = issuer.lastStdout();
+    issuer.runCommand("dot", QStringList() << "-Tsvg", dotGraph.toUtf8());
+    p_graphDialog->showSVG(issuer.lastStdout().toUtf8());
+}
+
 void QtGuiltWidget::deletePatch()
 {
   qDebug() << __FUNCTION__;
@@ -299,6 +312,7 @@ void QtGuiltWidget::setConnections()
   connectAction(ui->actionNew_Patch,        SLOT(newPatch()));
   connectAction(ui->actionSave_header,      SLOT(saveHeader()));
   connectAction(ui->actionUnrefreshed,      SLOT(diffz()));
+  connectAction(ui->actionGraph,            SLOT(showGraph()));
 
   //Ugly, to avoid weird segfault...
 //  connect(ui->treeView->itemDelegate(), SIGNAL(closeEditor(QWidget*)), p_model, SLOT(editEnd()), Qt::UniqueConnection);
@@ -327,7 +341,8 @@ void QtGuiltWidget::setActions()
                       << ui->actionPop
                       << ui->actionPush
                       << ui->actionUnrefreshed
-                      << ui->actionAuto_Expand_Collapse;
+                      << ui->actionAuto_Expand_Collapse
+                      << ui->actionGraph;
   ui->actionAuto_Expand_Collapse->setCheckable(true);
   p_contextualMenu->addActions(m_contextualActions);
   p_toolbar->addActions(m_toolBarActions);
