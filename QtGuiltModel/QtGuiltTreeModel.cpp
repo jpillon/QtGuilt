@@ -24,6 +24,7 @@
 #include <QCoreApplication>
 #include <QtGuiltPatch.h>
 #include <QDebug>
+#include <QMimeData>
 
 QtGuiltTreeModel::QtGuiltTreeModel(QtGuiltAbstractUserAsk *asker, QObject *parent) :
   QAbstractItemModel(parent),
@@ -141,9 +142,9 @@ Qt::ItemFlags QtGuiltTreeModel::flags(const QModelIndex &index) const
 {
   QtGuiltPatch* patch = dynamic_cast<QtGuiltPatch*>((QtGuiltTreeItem*)index.internalPointer());
   Qt::ItemFlags result = QAbstractItemModel::flags(index);
+
   if(patch || (!index.isValid() && !index.parent().isValid()))
   {
-//    if(index.column() == 0)
       result = Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | Qt::ItemIsEditable | result;
   }
   return result;
@@ -152,6 +153,28 @@ Qt::ItemFlags QtGuiltTreeModel::flags(const QModelIndex &index) const
 Qt::DropActions QtGuiltTreeModel::supportedDropActions() const
 {
     return QAbstractItemModel::supportedDropActions() | Qt::MoveAction;
+}
+
+bool QtGuiltTreeModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
+{
+    if(row >= rowCount(parent)) {
+        // Special case when moving a patch at the top
+        return setData(QModelIndex(), QString(data->data("application/x-QtGuiltTreeModelPatchName")), Qt::DisplayRole);
+    } else {
+        return QAbstractItemModel::dropMimeData(data, action, row, column, parent);
+    }
+}
+
+QMimeData* QtGuiltTreeModel::mimeData(const QModelIndexList& indexes) const
+{
+    QMimeData* res = QAbstractItemModel::mimeData(indexes);
+    if(indexes.length() == 1) {
+        QtGuiltPatch* patch = dynamic_cast<QtGuiltPatch*>((QtGuiltTreeItem*)indexes[0].internalPointer());
+        if(patch) {
+            res->setData("application/x-QtGuiltTreeModelPatchName", patch->filename().toLatin1());
+        }
+    }
+    return res;
 }
 
 QtGuiltAskerModel *QtGuiltTreeModel::guiltAskerModel() const

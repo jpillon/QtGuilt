@@ -61,6 +61,8 @@ class QtGuiltTreeModel : public QAbstractItemModel
     virtual Qt::ItemFlags   flags ( const QModelIndex & index ) const;
     virtual Qt::DropActions supportedDropActions() const;
 
+    virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
+    virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
 
     QtGuiltAskerModel* guiltAskerModel() const;
     QtGuiltModel *guiltModel() const;
