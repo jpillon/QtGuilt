@@ -485,8 +485,7 @@ bool QtGuiltModel::setEnabled(const QString &patchname, bool enabled)
     endAction(__FUNCTION__);
     return false;
   }
-//  if(push(prev))
-  if(push(m_fakeBasePatch))
+  if(push(prev))
   {
     QCoreApplication::processEvents();
     if(enabled)
