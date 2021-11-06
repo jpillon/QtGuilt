@@ -62,12 +62,7 @@ bool QtGuiltModel::init()
       files = lastStdoutList();
       if(runGitCommand(QStringList() << "init"))
       {
-        foreach (QString f, files) {
-          if(!runGitCommand((QStringList() << "add") + files ))
-          {
-            break;
-          }
-        }
+        res = runGitCommand((QStringList() << "add") + files );
         if(res && runGitCommand(QStringList() << "commit" << "-m" << "fake head for guilt over svn"))
         {
           if(runGuiltCommand(QStringList() << "init"))
