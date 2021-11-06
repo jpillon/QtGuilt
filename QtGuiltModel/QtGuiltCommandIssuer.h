@@ -58,7 +58,7 @@ class QtGuiltCommandIssuer : public QObject
      * @param args the arguments
      * @return true if command went OK, false otherwise
      */
-    bool runCommand(const QString& program, const QStringList& args) const;
+    bool runCommand(const QString& program, const QStringList& args, const QByteArray standardInput = QByteArray()) const;
 
     /**
      * @brief Runs a guilt command

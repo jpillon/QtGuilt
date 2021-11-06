@@ -55,7 +55,7 @@ QStringList QtGuiltCommandIssuer::lastStdoutList() const
   return lastStdout().split("\n", Qt::SkipEmptyParts);
 }
 
-bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList &args) const
+bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList &args, const QByteArray standardInput) const
 {
   const_cast<QtGuiltCommandIssuer*>(this)->blockSignals(true);
   QProcess process;
@@ -66,7 +66,18 @@ bool QtGuiltCommandIssuer::runCommand(const QString &program, const QStringList 
   m_lastError = "";
 
   process.setWorkingDirectory(m_workingDir);
-  process.start(program, args, QIODevice::ReadOnly);
+  QIODevice::OpenMode mode = QIODevice::ReadOnly;
+  if(!standardInput.isNull()) {
+      mode = QIODevice::ReadWrite;
+  }
+
+  process.start(program, args, mode);
+  if(!standardInput.isNull()) {
+      process.waitForStarted();
+      process.write(standardInput);
+      process.closeWriteChannel();
+
+  }
   process.waitForFinished(-1);
   result = (process.exitCode() == 0);
   m_lastStdout = process.readAllStandardOutput();
