@@ -661,7 +661,7 @@ bool QtGuiltModel::previous(const QString &patchname, QString &previouspatch, bo
     if(active)
     {
       bool isactive;
-      for(int i = s.indexOf(patchname)-1 ; i>=s.size() ; i--)
+      for(int i = s.indexOf(patchname)-1 ; i>=0 ; i--)
       {
         if(!isEnabled(s[i], isactive))
         {
@@ -681,7 +681,8 @@ bool QtGuiltModel::previous(const QString &patchname, QString &previouspatch, bo
       res = true;
     }
   }
-
+  if(previouspatch.isEmpty())
+      previouspatch = m_fakeBasePatch;
   endAction(__FUNCTION__);
   return res;
 }
