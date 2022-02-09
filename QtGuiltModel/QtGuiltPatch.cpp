@@ -242,7 +242,7 @@ void QtGuiltPatch::updateFromFile(const QString &filename)
     }
     p_watcher->addPath(filename);
   }
-  connect(p_watcher, SIGNAL(fileChanged(QString)), this, SLOT(updateFromFile(QString)));
+  connect(p_watcher, SIGNAL(fileChanged(QString)), this, SLOT(updateFromFile(QString)), Qt::UniqueConnection);
 }
 
 void QtGuiltPatch::clear()

@@ -69,7 +69,7 @@ void QtGuiltTreeRootItem::treeItemUpdate()
     if(!treeChild(patch))
     {
       QtGuiltTreeItem* child = new QtGuiltPatch(p_model->patchFile(patch), this);
-      connect(child, SIGNAL(topChanged()), this, SLOT(notifyTopChanged()));
+      connect(child, SIGNAL(topChanged()), this, SLOT(notifyTopChanged()), Qt::UniqueConnection);
       addTreeChild(child);
     }
   }

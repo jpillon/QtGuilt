@@ -24,7 +24,7 @@ void QtGuiltTreeItem::addTreeChild(QtGuiltTreeItem *child)
   notifyBeginInsertRows(leftIndex(), treeChildrenCount(), treeChildrenCount());
   child->setTreeParent(this);
   m_children.append(child);
-  connect(child, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(notify(QModelIndex,QModelIndex)));
+  connect(child, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(notify(QModelIndex,QModelIndex)), Qt::UniqueConnection);
   notifyEndInsertRows();
 }
 
