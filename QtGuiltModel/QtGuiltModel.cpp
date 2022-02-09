@@ -393,7 +393,7 @@ bool QtGuiltModel::extract(const QString &patchname, const QString &filename)
       }
     }
   }
-  res = restoreTop() && res;
+  res = pop() && restoreTop() && res;
   endAction(__FUNCTION__);
 
   return res;
